@@ -25,8 +25,6 @@ You can find detailed documentation in the [`docs/`](./docs) folder:
 - [Design](./docs/design.md) — overall system design and ideas  
 - [Workflow](./docs/workflow.md) — how components interact  
 - [Tech Stack](./docs/tech_stack.md) — technologies and dependencies used  
-- [Installation](./docs/installation.md) — setup and running instructions  
-- [Architecture](./docs/architecture.md) — structure and logic flow  
 
 ---
 
