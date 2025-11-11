@@ -28,7 +28,4 @@ You can find detailed documentation in the [`docs/`](./docs) folder:
 
 ---
 
-## Project Structure
-
-For developers interested in exploring the codebase:
-
+> :rotating_light: This project is still under development
