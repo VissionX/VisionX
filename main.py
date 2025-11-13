@@ -5,7 +5,7 @@ from audio.audio_fb import AudioFeedback
 
 
 def main():
-    print("Starting Makfouf Assist...")
+    print("Starting VisionX Assist...")
     
     camera = CameraInput()
     voice = VoiceTrigger()
