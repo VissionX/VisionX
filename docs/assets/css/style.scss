@@ -1,0 +1,60 @@
+$bg: #0a1a2f;
+$bg-2: #0f2940;
+$text: #e6e9ef;
+$text-muted: #a9b3c1;
+$accent: #3a7bd5;
+$accent-2: #5aa2ff;
+$border: #1e3a5c;
+
+
+body {
+background-color: $bg;
+color: $text;
+font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+margin: 0;
+-webkit-font-smoothing: antialiased;
+}
+
+
+a { color: $accent; text-decoration: none; }
+a:hover { color: $accent-2; }
+
+
+.header, header {
+background: $bg-2;
+border-bottom: 1px solid $border;
+padding: 18px 28px;
+}
+
+
+main {
+max-width: 900px;
+margin: 36px auto;
+padding: 0 20px;
+}
+
+
+h1, h2, h3 {
+color: $accent-2;
+margin-top: 1.1em;
+}
+
+
+p { color: $text; }
+
+
+pre, code {
+background: darken($bg-2, 2%);
+border: 1px solid $border;
+padding: 10px;
+border-radius: 6px;
+color: $text;
+overflow-x: auto;
+}
+
+
+.footer {
+text-align: center;
+color: $text-muted;
+margin: 48px 0;
+}
