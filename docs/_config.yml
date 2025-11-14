@@ -1,7 +1,7 @@
 title: VisionX Documentation
 email: you@example.com
 description: "VisionX — Assistive computer-vision system for the visually impaired."
-baseurl: "" # the subpath of your site, e.g. /project
+baseurl: "/VisionX" # the subpath of your site, e.g. /project
 url: "" # the base hostname & protocol for your site
 
 
