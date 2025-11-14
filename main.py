@@ -1,26 +1,16 @@
-from camera.camera_inputs import CameraInput
+# from camera.camera_inputs import CameraInput
 from audio.v_trigger import VoiceTrigger
-from vision.obj_detection import ObjectDetector
-from audio.audio_fb import AudioFeedback
-
+# from vision.obj_detection import ObjectDetector
 
 def main():
-    print("Starting VisionX Assist...")
-    
-    camera = CameraInput()
-    voice = VoiceTrigger()
-    detector = ObjectDetector()
-    feedback = AudioFeedback()
-    
-    print("Waiting for voice trigger...")
-    if voice.wait_for_trigger():
-        print("Voice detected, starting camera stream...")
-        for frame in camera.start_stream():
-            objects = detector.detect(frame)
-            feedback.speak(objects)
-    
-    print("Application ended.")
+    print("Starting VisionX voice system...")
+    trigger = VoiceTrigger(trigger_word="start")
 
+    if trigger.check_trigger():
+        print("✅ Voice command recognized! (Start detected)")
+        # later this will trigger the camera
+    else:
+        print("❌ No valid command detected.")
 
 if __name__ == "__main__":
     main()
