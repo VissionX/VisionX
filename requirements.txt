@@ -1,0 +1,10 @@
+opencv-python==4.9.0.80
+ultralytics==8.2.0
+numpy==2.0.1
+pyttsx3==2.90
+vosk==0.3.45
+kivy==2.3.0
+kivymd==1.1.1
+Pillow==10.3.0
+sounddevice==0.4.6
+
