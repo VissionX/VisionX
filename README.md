@@ -120,7 +120,7 @@ Edit `infra/config.py` to customize:
 
 ### YOLO model not loading
 - Ensure internet connection for first download
-- Manually download from: https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8n.pt
+- Manually download from: [Direct Link](https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8n.pt)
 
 ## Future Enhancements
 
