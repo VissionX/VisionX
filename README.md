@@ -142,4 +142,4 @@ This project is intended for educational purposes as a graduation project.
 - Vosk: Alpha Cephei
 - KivyMD: KivyMD Team
 
-> This project is still under development!!
+>:rotating_light: This project is still under development!!
