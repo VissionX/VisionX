@@ -42,7 +42,7 @@ pip install -r requirements.txt
 ### 2. Download Vosk Model
 
 Download a Vosk model for your language:
-- English: https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip
+- English: [Offical Link](https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip)
 - Extract to a `model` folder in the project root
 
 ```bash
