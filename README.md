@@ -141,5 +141,3 @@ This project is intended for educational purposes as a graduation project.
 - YOLOv8: Ultralytics
 - Vosk: Alpha Cephei
 - KivyMD: KivyMD Team
-
->:rotating_light: This project is still under development!!
