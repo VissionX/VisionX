@@ -1,0 +1,36 @@
+import os
+
+class Config:
+    """Application configuration"""
+    
+    def __init__(self):
+        # Camera settings
+        self.CAMERA_ID = 0
+        self.CAMERA_WIDTH = 640
+        self.CAMERA_HEIGHT = 480
+        
+        # YOLO settings
+        self.YOLO_MODEL = 'yolov8n.pt'
+        self.CONFIDENCE_THRESHOLD = 0.5
+        
+        # Speech settings
+        self.VOSK_MODEL_PATH = 'model'
+        self.SAMPLE_RATE = 16000
+        self.TRIGGER_WORDS = ['start', 'detect', 'see', 'look', 'scan']
+        
+        # TTS settings
+        self.TTS_RATE = 150
+        self.TTS_VOLUME = 1.0
+        
+        # Detection settings
+        self.DETECTION_COOLDOWN = 3.0
+    
+    @classmethod
+    def from_env(cls):
+        """Load config from environment variables"""
+        config = cls()
+        config.CAMERA_ID = int(os.getenv('CAMERA_ID', 0))
+        config.YOLO_MODEL = os.getenv('YOLO_MODEL', 'yolov8n.pt')
+        config.CONFIDENCE_THRESHOLD = float(os.getenv('CONFIDENCE_THRESHOLD', 0.5))
+        config.VOSK_MODEL_PATH = os.getenv('VOSK_MODEL_PATH', 'model')
+        return config

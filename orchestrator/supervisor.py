@@ -125,9 +125,23 @@ class VisionSupervisor:
         self.is_active = False
         
         # Stop services
-        self.speech_recognition.stop_listening()
-        self.camera.release()
-        self.tts.stop()
+        try:
+            if hasattr(self, 'speech_recognition') and self.speech_recognition:
+                self.speech_recognition.stop_listening()
+        except Exception as e:
+            print(f"Error stopping speech recognition: {e}")
+        
+        try:
+            if hasattr(self, 'camera') and self.camera:
+                self.camera.release()
+        except Exception as e:
+            print(f"Error releasing camera: {e}")
+        
+        try:
+            if hasattr(self, 'tts') and self.tts:
+                self.tts.stop()
+        except Exception as e:
+            print(f"Error stopping TTS: {e}")
         
         print("VisionX stopped")
     

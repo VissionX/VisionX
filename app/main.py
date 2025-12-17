@@ -19,7 +19,7 @@ class VisionXApp(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.supervisor = None
-        self.config = Config()
+        self.app_config = Config()  # Renamed from self.config to avoid Kivy conflict
         
     def build(self):
         """Build the UI"""
@@ -75,26 +75,37 @@ class VisionXApp(MDApp):
     def _initialize_app(self, dt):
         """Initialize the supervisor"""
         try:
+            print("Creating VisionSupervisor...")
             # Create supervisor
-            self.supervisor = VisionSupervisor(self.config)
+            self.supervisor = VisionSupervisor(self.app_config)  # Use app_config
+            print("VisionSupervisor created successfully")
             
             # Initialize in background thread
             import threading
             init_thread = threading.Thread(target=self._init_worker, daemon=True)
             init_thread.start()
+            print("Initialization thread started")
             
         except Exception as e:
+            import traceback
+            error_msg = f"Error: {str(e)}\n{traceback.format_exc()}"
+            print(error_msg)
             self.update_status(f"Error: {str(e)}")
     
     def _init_worker(self):
         """Worker thread for initialization"""
         try:
+            print("Starting supervisor initialization...")
             self.supervisor.initialize()
+            print("Supervisor initialized successfully")
             
             # Schedule UI update on main thread
             Clock.schedule_once(lambda dt: self._start_listening(), 0)
             
         except Exception as e:
+            import traceback
+            error_msg = f"Init error: {str(e)}\n{traceback.format_exc()}"
+            print(error_msg)
             Clock.schedule_once(lambda dt: self.update_status(f"Init error: {str(e)}"), 0)
     
     def _start_listening(self):
@@ -120,14 +131,19 @@ class VisionXApp(MDApp):
     
     def stop_app(self, *args):
         """Stop the application"""
+        print("Stopping application...")
         if self.supervisor:
             self.supervisor.stop()
         self.stop()
     
     def on_stop(self):
         """Cleanup on app stop"""
+        print("App on_stop called")
         if self.supervisor:
-            self.supervisor.stop()
+            try:
+                self.supervisor.stop()
+            except Exception as e:
+                print(f"Error during cleanup: {e}")
 
 def main():
     """Entry point"""

@@ -10,6 +10,14 @@ class VoskSpeechRecognition:
     """Vosk offline speech recognition"""
     
     def __init__(self, model_path="model", sample_rate=16000, trigger_words=None):
+        """
+        Initialize Vosk speech recognition
+        
+        Args:
+            model_path: Path to Vosk model directory
+            sample_rate: Audio sample rate
+            trigger_words: List of words that trigger detection (e.g., ['start', 'detect'])
+        """
         self.model = vosk.Model(model_path)
         self.sample_rate = sample_rate
         self.trigger_words = trigger_words or ['start', 'detect', 'see', 'look']
@@ -21,17 +29,25 @@ class VoskSpeechRecognition:
         self.recognition_thread = None
         
     def _audio_callback(self, indata, frames, time_info, status):
+        """Callback for audio input"""
         if status:
             print(f"Audio status: {status}")
         self.audio_queue.put(bytes(indata))
     
     def start_listening(self, callback):
+        """
+        Start listening for voice commands
+        
+        Args:
+            callback: Function to call when trigger word is detected
+        """
         if self.is_listening:
             return
         
         self.callback = callback
         self.is_listening = True
         
+        # Start audio stream
         self.stream = sd.RawInputStream(
             samplerate=self.sample_rate,
             blocksize=8000,
@@ -41,55 +57,43 @@ class VoskSpeechRecognition:
         )
         self.stream.start()
         
+        # Start recognition thread
         self.recognition_thread = threading.Thread(target=self._recognition_worker, daemon=True)
         self.recognition_thread.start()
-        print("🎤 Speech recognition thread started and listening...")
     
     def _recognition_worker(self):
+        """Worker thread for speech recognition"""
         recognizer = vosk.KaldiRecognizer(self.model, self.sample_rate)
-        recognizer.SetWords(True)  # Enable word-level timestamps
-        
-        print("🎤 Recognition worker active, waiting for speech...")
         
         while self.is_listening:
             try:
                 data = self.audio_queue.get(timeout=0.5)
                 
-                # Also check partial results for debugging
                 if recognizer.AcceptWaveform(data):
                     result = json.loads(recognizer.Result())
-                    text = result.get('text', '').lower().strip()
+                    text = result.get('text', '').lower()
                     
                     if text:
-                        print(f"✓ RECOGNIZED: '{text}'")
+                        print(f"Recognized: {text}")
                         
                         # Check for trigger words
-                        for trigger in self.trigger_words:
-                            if trigger in text:
-                                print(f"🎯 TRIGGER WORD FOUND: '{trigger}' in '{text}'")
-                                command = VoiceCommand(
-                                    text=text,
-                                    confidence=1.0,
-                                    timestamp=time.time()
-                                )
-                                
-                                if self.callback:
-                                    self.callback(command)
-                                break
-                else:
-                    # Print partial results for debugging
-                    partial = json.loads(recognizer.PartialResult())
-                    partial_text = partial.get('partial', '')
-                    if partial_text:
-                        print(f"... hearing: '{partial_text}'", end='\r')
+                        if any(word in text for word in self.trigger_words):
+                            command = VoiceCommand(
+                                text=text,
+                                confidence=1.0,
+                                timestamp=time.time()
+                            )
+                            
+                            if self.callback:
+                                self.callback(command)
                 
             except queue.Empty:
                 continue
             except Exception as e:
-                print(f"❌ Recognition error: {e}")
+                print(f"Recognition error: {e}")
     
     def stop_listening(self):
-        print("Stopping speech recognition...")
+        """Stop listening"""
         self.is_listening = False
         
         if self.stream is not None:
