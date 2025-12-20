@@ -1,6 +1,12 @@
 # VisionX - Object Detection for the Visually Impaired
 
-A voice-activated object detection application designed to help visually impaired users understand their surroundings using AI.
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![YOLOv8](https://img.shields.io/badge/YOLO-v8-orange.svg)](https://github.com/ultralytics/ultralytics)
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![Platform](https://img.shields.io/badge/platform-desktop-lightgrey.svg)]()
+
+A voice-activated object detection application designed to help visually impaired users understand their surroundings using artificial intelligence and speech feedback.
 
 ## Features
 
