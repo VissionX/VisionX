@@ -1,8 +1,5 @@
 # VisionX - Object Detection for the Visually Impaired
 
-[![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
-[![YOLOv8](https://img.shields.io/badge/YOLO-v8-orange.svg)](https://github.com/ultralytics/ultralytics)
-
 A voice-activated object detection application designed to help visually impaired users understand their surroundings using artificial intelligence and speech feedback.
 
 ## Features
