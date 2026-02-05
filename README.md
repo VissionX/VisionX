@@ -1,4 +1,4 @@
-# VisionX - Object Detection for the Visually Impaired
+# Abserny - Object Detection for the Visually Impaired
 
 A voice-activated object detection application designed to help visually impaired users understand their surroundings using artificial intelligence and speech feedback.
 
@@ -13,7 +13,7 @@ A voice-activated object detection application designed to help visually impaire
 ## Architecture
 
 ```
-visionx/
+abserny/
 ├─ app/                     # UI entry point
 │  └─ main.py              # KivyMD application
 ├─ orchestrator/            # Main coordination logic
